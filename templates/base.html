@@ -8,6 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    {% block content %}{% endblock %}
+    <div class="container-xl" id="main">
+        {% include 'includes/header.html' %}
+        {% block content %}{% endblock %}
+    {% include 'includes/footer.html' %}
+    </div>
 </body>
 </html>

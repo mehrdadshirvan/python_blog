@@ -6,7 +6,7 @@ def index(request):
     return render(request, "blog/index.html")
 
 def posts(request):
-    pass
+    return render(request, "blog/posts.html")
 
 def single_post(request):
     pass
