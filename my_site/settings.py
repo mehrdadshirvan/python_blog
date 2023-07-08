@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'rosena_v2',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'HOST': '',
         'PORT': '',
     }
 }
