@@ -6,8 +6,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Product(models.Model):
     id = models.BigAutoField
-    name = models.CharField(max_length=150,validators=[MaxValueValidator(150)])
-    slug = models.SlugField(default="",null=False, db_index=True)
+    name = models.CharField(max_length=150)
+    slug = models.SlugField(default="",null=False, blank=True,editable=False, db_index=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -17,4 +17,4 @@ class Product(models.Model):
         return reverse('blog-single-post', args=[self.slug])
 
     def __str__(self):
-        return f"{self.title} ({self.id})"
+        return f"{self.name} ({self.id})"
