@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rosena_v2',
+        'NAME': 'python_test_v1',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '',
