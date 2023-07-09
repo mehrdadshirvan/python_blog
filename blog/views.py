@@ -5,16 +5,17 @@ import requests
 import json
 from django.db import connections
 from django.http import HttpResponse
+from .models import Product
 
 # Create your views
-from blog.models import Product
+# from blog.models import Product
 
 
 def index(request):
     return render(request, "blog/index.html")
 
 def posts(request):
-    posts = Product.objects.all()
+    posts = Product.objects.all().order_by('-id')
     return render(request, "blog/posts.html",{'posts':posts})
 
 def create(request):
