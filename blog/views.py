@@ -1,11 +1,14 @@
+from xml.etree.ElementInclude import include
+
 import mysql.connector.connection
 from MySQLdb import OperationalError
 from django.shortcuts import render, redirect, get_object_or_404
 import requests
 import json
 from django.db import connections
-from django.http import HttpResponse
-from .models import Product
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import Product, Customer
+
 
 # Create your views
 # from blog.models import Product
@@ -38,3 +41,10 @@ def single_post(request,slug):
         'name':post.name,
     })
 
+
+def create_customer(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        Customer(name=name).save()
+
+    return HttpResponseRedirect('/')
