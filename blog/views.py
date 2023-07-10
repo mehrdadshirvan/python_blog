@@ -10,10 +10,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from .forms import CustomerForm,ProfileForm
 from .models import Product, Customer,Customer
-
+from django.views.generic import ListView
 
 # Create your views
 # from blog.models import Product
+
+def ListView(ListView):
+    model = Customer
+    template_name = "blog/index.html"
+    context_object_name = "profile"
+    pass
 
 
 def index(request):
