@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
     # prepopulated_fields = {"slug": ("name",)}
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('id',"name")
+    list_display = ('id',"name",'avatar')
 
 
 admin.site.register(Product, ProductAdmin)

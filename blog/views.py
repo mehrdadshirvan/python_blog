@@ -8,8 +8,8 @@ import json
 from django.db import connections
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .forms import CustomerForm
-from .models import Product, Customer
+from .forms import CustomerForm,ProfileForm
+from .models import Product, Customer,Customer
 
 
 # Create your views
@@ -17,7 +17,8 @@ from .models import Product, Customer
 
 
 def index(request):
-    cform = CustomerForm()
+    # cform = CustomerForm()
+    cform = ProfileForm()
     return render(request, "blog/index.html",{'cform':cform})
 
 def posts(request):
@@ -57,10 +58,16 @@ def create_customer(request):
         # if cform.is_valid():
         #     Customer(name=cform.cleaned_data['name']).save()
         #     return HttpResponseRedirect('/')
-        store_file(request.FILES['avatar'])
-        return HttpResponseRedirect('/')
+        submited_form = ProfileForm(request.POST,request.FILES)
+        if submited_form.is_valid():
+            customer = Customer(avatar=request.FILES['avatar'])
+            customer.save()
+            return HttpResponseRedirect("/customer/create")
+        else:
+            return render(request, "/customer/create")
     else:
-        cform = CustomerForm()
+        # cform = CustomerForm()
+        cform = ProfileForm()
 
     return render(request, "blog/index.html",{'cform':cform})
 
