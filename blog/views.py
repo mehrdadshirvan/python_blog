@@ -23,9 +23,10 @@ def ListView(ListView):
 
 
 def index(request):
+    request.session['test'] = 'mehrdad test session'
     # cform = CustomerForm()
     cform = ProfileForm()
-    return render(request, "blog/index.html",{'cform':cform})
+    return render(request, "blog/index.html",{'cform':cform,'request':request})
 
 def posts(request):
     posts = Product.objects.all().order_by('-id')
