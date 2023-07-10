@@ -26,6 +26,7 @@ class Customer(models.Model):
     id = models.BigAutoField
     name = models.CharField(max_length=100)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)
+    avatar = models.FileField(upload_to="images",default="",null=False)
 
     def __str__(self):
         return f"{self.name}"
