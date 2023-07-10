@@ -7,6 +7,8 @@ import requests
 import json
 from django.db import connections
 from django.http import HttpResponse, HttpResponseRedirect
+
+from .forms import CustomerForm
 from .models import Product, Customer
 
 
@@ -15,7 +17,8 @@ from .models import Product, Customer
 
 
 def index(request):
-    return render(request, "blog/index.html")
+    cform = CustomerForm()
+    return render(request, "blog/index.html",{'cform':cform})
 
 def posts(request):
     posts = Product.objects.all().order_by('-id')
@@ -42,9 +45,22 @@ def single_post(request,slug):
     })
 
 
+def store_file(file):
+    with open('temp/image.jpg','wb+') as dest:
+        for chunk in file.chunks():
+            dest.write(chunk)
+
+
 def create_customer(request):
     if request.method == 'POST':
-        name = request.POST['name']
-        Customer(name=name).save()
+        # cform = CustomerForm(request.POST)
+        # if cform.is_valid():
+        #     Customer(name=cform.cleaned_data['name']).save()
+        #     return HttpResponseRedirect('/')
+        store_file(request.FILES['avatar'])
+        return HttpResponseRedirect('/')
+    else:
+        cform = CustomerForm()
 
-    return HttpResponseRedirect('/')
+    return render(request, "blog/index.html",{'cform':cform})
+

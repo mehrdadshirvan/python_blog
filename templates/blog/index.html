@@ -4,10 +4,21 @@
     <div class="bg-gray-100">
 
         <main class="relative isolate">
-            make customer
-            <form action="{% url 'create-customer' %}" method="POST">
+            <form action="{% url 'create-customer' %}"
+                  class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                  method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="text" name="name" id="name">
+                <div class="form">
+                     {{cform.name.label_tag}}
+{#                    <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">#}
+{#                         {{cform.name}}#}
+{#                    </div>#}
+
+                    <input type="file" name="avatar" id="avatar">
+
+                    {{cform.name.errors}}
+                </div>
+
                 <button type="submit">send</button>
             </form>
         </main>
